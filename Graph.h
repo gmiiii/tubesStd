@@ -4,60 +4,63 @@
 #include <iostream>
 using namespace std;
 
-
-typedef int infotype_anak;
-typedef int infotype_induk;
-
-typedef struct elemen_list_anak* adr_anak;
-
-struct elemen_list_anak {
-    infotype_anak info;
-    adr_anak next;
+struct infotypeAnak{
+    double km;
+    string dest;
 };
 
-struct list_anak {
-    adr_anak first;
+typedef string infotypeInduk;
+
+typedef struct elmListAnak *adrAnak;
+typedef struct elmListInduk *adrInduk;
+
+struct elmListAnak {
+    infotypeAnak info;
+    adrAnak next;
 };
 
-typedef struct elemen_list_induk* adr_induk;
-
-struct elemen_list_induk {
-    infotype_induk info;
-    adr_anak lanak; 
-    adr_induk next;
+struct listAnak {
+    adrAnak first;
 };
 
-
-struct list_induk {
-    adr_induk first;
+struct elmListInduk {
+    infotypeInduk info;
+    adrAnak lanak; 
+    adrInduk next;
 };
 
+struct listInduk {
+    adrInduk first;
+};
 
-void createListInduk(list_induk& L);
-void createListAnak(list_anak& L);
+//innit method
+void createListInduk(listInduk &L);
+void createListAnak(listAnak &L);
 
+//allocate method
+adrInduk alokasiInduk(infotypeInduk X);
+adrAnak alokasiAnak(infotypeAnak X);
 
-adr_induk alokasiInduk(infotype_induk X);
-adr_anak alokasiAnak(infotype_anak X);
+//deallocate method
+adrInduk deAlokasiInduk(infotypeInduk X);
+adrAnak deAlokasiAnak(infotypeAnak X);
 
+//add method
+void insertLastInduk(listInduk &L, adrInduk P);
+void insertLastAnak(listAnak &L, adrAnak P);
 
-void insertFirstInduk(list_induk &L, adr_induk P);
-void insertLastInduk(list_induk &L, adr_induk P);
-void insertAfterInduk(list_induk &L, adr_induk P, adr_induk Prec);
+//always return delete value on delete method
+void deleteAfterInduk(listInduk &L, adrInduk &P, adrInduk Prec);
+void deleteAfterAnak(listAnak &L, adrAnak &P, adrAnak Prec);
 
-void insertFirstAnak(list_anak &L, adr_anak P);
-void insertLastAnak(list_anak &L, adr_anak P);
-void insertAfterAnak(list_anak &L, adr_anak P, adr_anak Prec);
+//search method
+adrInduk findInduk(listInduk L, infotypeInduk X);
+adrAnak findAnak(listAnak L, infotypeAnak X);
 
-void deleteLastInduk(list_induk &L, adr_induk &P);
-void deleteAfterInduk(list_induk &L, adr_induk &P, adr_induk Prec);
-void deleteLastAnak(list_anak &L, adr_anak &P);
-void deleteAfterAnak(list_anak &L, adr_anak &P, adr_anak Prec);
+//find least km on child
+adrAnak findFastest(listInduk L, string dari, string ke);
 
-adr_induk FindInduk(list_induk L, infotype_induk X);
-adr_anak FindAnak(list_anak L, infotype_anak X);
-
-void PrintInfoInduk(list_induk L);
-void PrintInfoAnak(list_anak L);
+void PrintInfoInduk(listInduk L);
+void PrintInfoAnak(listAnak L);
 
 #endif
